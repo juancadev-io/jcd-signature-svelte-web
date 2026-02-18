@@ -19,7 +19,7 @@
 
 <!-- Layout picker -->
 <div class="pt-3">
-	<label class="block text-xs font-medium text-gray-600 mb-2">Layout</label>
+	<p class="block text-xs font-medium text-gray-600 mb-2">Layout</p>
 	<div class="grid grid-cols-3 gap-2">
 		{#each layouts as l}
 			<button
@@ -95,7 +95,7 @@
 
 <!-- Style picker -->
 <div>
-	<label class="block text-xs font-medium text-gray-600 mb-2">Style</label>
+	<p class="block text-xs font-medium text-gray-600 mb-2">Style</p>
 	<div class="grid grid-cols-3 gap-2">
 		{#each styles as st}
 			<button
@@ -110,31 +110,31 @@
 
 <!-- Colors -->
 <div>
-	<label class="block text-xs font-medium text-gray-600 mb-1">Theme Color</label>
+	<label for="design-theme-color-picker" class="block text-xs font-medium text-gray-600 mb-1">Theme Color</label>
 	<div class="flex items-center gap-3">
-		<input type="color" bind:value={$signature.primaryColor} class="w-10 h-10 rounded-lg border border-gray-200 cursor-pointer p-0.5" />
+		<input id="design-theme-color-picker" type="color" bind:value={$signature.primaryColor} class="w-10 h-10 rounded-lg border border-gray-200 cursor-pointer p-0.5" />
 		<input type="text" bind:value={$signature.primaryColor} placeholder="#6366f1" class="flex-1 rounded-lg border border-gray-200 px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-indigo-400" />
 	</div>
 </div>
 <div>
-	<label class="block text-xs font-medium text-gray-600 mb-1">Text Color</label>
+	<label for="design-text-color-picker" class="block text-xs font-medium text-gray-600 mb-1">Text Color</label>
 	<div class="flex items-center gap-3">
-		<input type="color" bind:value={$signature.textColor} class="w-10 h-10 rounded-lg border border-gray-200 cursor-pointer p-0.5" />
+		<input id="design-text-color-picker" type="color" bind:value={$signature.textColor} class="w-10 h-10 rounded-lg border border-gray-200 cursor-pointer p-0.5" />
 		<input type="text" bind:value={$signature.textColor} placeholder="#374151" class="flex-1 rounded-lg border border-gray-200 px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-indigo-400" />
 	</div>
 </div>
 <div>
-	<label class="block text-xs font-medium text-gray-600 mb-1">Link Color</label>
+	<label for="design-link-color-picker" class="block text-xs font-medium text-gray-600 mb-1">Link Color</label>
 	<div class="flex items-center gap-3">
-		<input type="color" bind:value={$signature.linkColor} class="w-10 h-10 rounded-lg border border-gray-200 cursor-pointer p-0.5" />
+		<input id="design-link-color-picker" type="color" bind:value={$signature.linkColor} class="w-10 h-10 rounded-lg border border-gray-200 cursor-pointer p-0.5" />
 		<input type="text" bind:value={$signature.linkColor} placeholder="#6366f1" class="flex-1 rounded-lg border border-gray-200 px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-indigo-400" />
 	</div>
 </div>
 
 <!-- Font -->
 <div>
-	<label class="block text-xs font-medium text-gray-600 mb-2">Font</label>
-	<select bind:value={$signature.fontFamily} class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400">
+	<label for="design-font-family" class="block text-xs font-medium text-gray-600 mb-2">Font</label>
+	<select id="design-font-family" bind:value={$signature.fontFamily} class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400">
 		<option value="Arial, sans-serif">Arial</option>
 		<option value="Georgia, serif">Georgia</option>
 		<option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
@@ -145,6 +145,6 @@
 
 <!-- Font size -->
 <div>
-	<label class="block text-xs font-medium text-gray-600 mb-1">Font Size ({$signature.fontSize}px)</label>
-	<input type="range" min="11" max="18" step="1" bind:value={$signature.fontSize} class="w-full accent-indigo-500" />
+	<label for="design-font-size" class="block text-xs font-medium text-gray-600 mb-1">Font Size ({$signature.fontSize}px)</label>
+	<input id="design-font-size" type="range" min="11" max="18" step="1" bind:value={$signature.fontSize} class="w-full accent-indigo-500" />
 </div>

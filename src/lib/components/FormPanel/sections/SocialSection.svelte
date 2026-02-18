@@ -13,8 +13,9 @@
 
 {#each fields as field}
 	<div class="pt-3 first:pt-3">
-		<label class="block text-xs font-medium text-gray-600 mb-1">{field.label}</label>
+		<label for={`social-${field.key}`} class="block text-xs font-medium text-gray-600 mb-1">{field.label}</label>
 		<input
+			id={`social-${field.key}`}
 			type="url"
 			bind:value={$signature.social[field.key]}
 			placeholder={field.placeholder}
