@@ -1,10 +1,10 @@
 /**
  * exportPNG.ts
  * Captures the live preview DOM element and downloads it as a PNG.
- * Uses html2canvas — optimized for mobile email client dimensions.
+ * Uses html-to-image for high-fidelity text rendering.
  */
 
-import html2canvas from 'html2canvas';
+import { toPng } from 'html-to-image';
 
 /**
  * Takes a DOM element (the preview container) and downloads it as PNG.
@@ -17,36 +17,32 @@ export async function exportAsPNG(element: HTMLElement, filename = 'signature.pn
 		await (document as Document & { fonts: FontFaceSet }).fonts.ready;
 	}
 
-	const captureScale = Math.max(2, Math.min(4, window.devicePixelRatio || 1));
-	const captureWidth = Math.ceil(element.scrollWidth || element.clientWidth);
-	const captureHeight = Math.ceil(element.scrollHeight || element.clientHeight);
+	const captureScale = 2;
+	const bounds = element.getBoundingClientRect();
+	const captureWidth = Math.ceil(Math.max(element.scrollWidth, element.clientWidth, bounds.width));
+	const captureHeight = Math.ceil(Math.max(element.scrollHeight, element.clientHeight, bounds.height));
 
-	let canvas: HTMLCanvasElement;
-	try {
-		canvas = await html2canvas(element, {
-			scale: captureScale,
-			useCORS: true,
-			backgroundColor: '#ffffff',
-			width: captureWidth,
-			height: captureHeight,
-			foreignObjectRendering: false,
-			logging: false
-		});
-	} catch {
-		// Fallback for environments where canvas rendering is not reliable.
-		canvas = await html2canvas(element, {
-			scale: captureScale,
-			useCORS: true,
-			backgroundColor: '#ffffff',
-			width: captureWidth,
-			height: captureHeight,
-			foreignObjectRendering: true,
-			logging: false
-		});
-	}
+	const downloadDataUrl = (dataUrl: string) => {
+		const link = document.createElement('a');
+		link.download = filename;
+		link.href = dataUrl;
+		link.click();
+	};
 
-	const link = document.createElement('a');
-	link.download = filename;
-	link.href = canvas.toDataURL('image/png');
-	link.click();
+	const dataUrl = await toPng(element, {
+		pixelRatio: captureScale,
+		cacheBust: true,
+		backgroundColor: '#ffffff',
+		width: captureWidth,
+		height: captureHeight,
+		canvasWidth: captureWidth * captureScale,
+		canvasHeight: captureHeight * captureScale,
+		skipAutoScale: true,
+		style: {
+			margin: '0',
+			transform: 'none'
+		}
+	});
+
+	downloadDataUrl(dataUrl);
 }
