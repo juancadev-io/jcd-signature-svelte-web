@@ -14,7 +14,7 @@
 	let fs = $derived(data.fontSize);
 </script>
 
-<table cellpadding="0" cellspacing="0" style="font-family:{data.fontFamily};font-size:{fs}px;color:{s.textColor};background:{s.containerBg};border-radius:{s.containerRadius};max-width:500px;">
+<table cellpadding="0" cellspacing="0" style="font-family:{data.fontFamily};font-size:{fs}px;line-height:1.35;color:{s.textColor};background:{s.containerBg};border-radius:{s.containerRadius};max-width:500px;">
 	<tbody>
 		<tr>
 			<td>
@@ -34,7 +34,7 @@
 							<!-- Avatar right -->
 							<td style="vertical-align:top;text-align:right;padding-left:14px;width:70px;">
 								{#if data.avatarUrl}
-									<img src={data.avatarUrl} alt={fullName} width="70" height="70" style="display:block;width:70px !important;height:70px !important;min-width:70px;min-height:70px;max-width:70px;max-height:70px;border-radius:9999px;object-fit:cover;{s.avatarBorder ? `border:${s.avatarBorder}` : ''}" />
+									<img src={data.avatarUrl} alt={fullName} width="70" height="70" style="display:block;width:70px !important;height:70px !important;min-width:70px;min-height:70px;max-width:70px;max-height:70px;border-radius:9999px;object-fit:cover;object-position:center center;box-sizing:border-box;{s.avatarBorder ? `border:${s.avatarBorder}` : ''}" />
 								{:else}
 									<div style="width:70px;height:70px;border-radius:50%;background:{data.primaryColor};display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:#fff;">
 										{initials}
@@ -47,12 +47,12 @@
 						<tr>
 							<td colspan="2" style="padding-top:8px;">
 								<div style="font-size:{fs - 2}px;color:{s.mutedColor};">
-									{#if data.email}<div><a href="mailto:{data.email}" style="color:{s.linkColor};text-decoration:none;">{data.email}</a></div>{/if}
+									{#if data.email}<div><a href="mailto:{data.email}" style="color:{s.linkColor};text-decoration:none;word-break:break-word;overflow-wrap:anywhere;">{data.email}</a></div>{/if}
 									<div style="display:flex;gap:8px;flex-wrap:wrap;">
 										{#if data.officePhone}<span>{data.officePhone}</span>{/if}
 										{#if data.mobilePhone}<span>{data.mobilePhone}</span>{/if}
 									</div>
-									{#if data.website}<div><a href={data.website} style="color:{s.linkColor};text-decoration:none;">{data.website}</a></div>{/if}
+									{#if data.website}<div><a href={data.website} style="color:{s.linkColor};text-decoration:none;word-break:break-word;overflow-wrap:anywhere;">{data.website}</a></div>{/if}
 								</div>
 							</td>
 						</tr>

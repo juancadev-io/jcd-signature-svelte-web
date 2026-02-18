@@ -16,7 +16,7 @@
 	let fs = $derived(data.fontSize);
 </script>
 
-<table cellpadding="0" cellspacing="0" style="font-family:{data.fontFamily};font-size:{fs}px;color:{s.textColor};background:{s.containerBg};border-radius:{s.containerRadius};max-width:500px;">
+<table cellpadding="0" cellspacing="0" style="font-family:{data.fontFamily};font-size:{fs}px;line-height:1.35;color:{s.textColor};background:{s.containerBg};border-radius:{s.containerRadius};max-width:500px;">
 	<tbody>
 		<tr>
 			<td>
@@ -25,7 +25,7 @@
 					<tbody><tr>
 						<td style="padding-right:12px;vertical-align:middle;">
 							{#if data.avatarUrl}
-								<img src={data.avatarUrl} alt={fullName} width="64" height="64" style="display:block;width:64px !important;height:64px !important;min-width:64px;min-height:64px;max-width:64px;max-height:64px;border-radius:9999px;object-fit:cover;{s.avatarBorder ? `border:${s.avatarBorder}` : ''}" />
+								<img src={data.avatarUrl} alt={fullName} width="64" height="64" style="display:block;width:64px !important;height:64px !important;min-width:64px;min-height:64px;max-width:64px;max-height:64px;border-radius:9999px;object-fit:cover;object-position:center center;box-sizing:border-box;{s.avatarBorder ? `border:${s.avatarBorder}` : ''}" />
 							{:else}
 								<div style="width:64px;height:64px;border-radius:50%;background:{data.primaryColor};display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:#fff;">
 									{initials}
@@ -49,10 +49,10 @@
 
 				<!-- Contact details full width -->
 				<div style="font-size:{fs - 2}px;color:{s.mutedColor};display:flex;gap:8px;flex-wrap:wrap;">
-					{#if data.email}<a href="mailto:{data.email}" style="color:{s.linkColor};text-decoration:none;">{data.email}</a>{/if}
+					{#if data.email}<a href="mailto:{data.email}" style="color:{s.linkColor};text-decoration:none;word-break:break-word;overflow-wrap:anywhere;">{data.email}</a>{/if}
 					{#if data.officePhone}<span>{data.email ? '·' : ''} {data.officePhone}</span>{/if}
 					{#if data.mobilePhone}<span>· {data.mobilePhone}</span>{/if}
-					{#if data.website}<span>· <a href={data.website} style="color:{s.linkColor};text-decoration:none;">{data.website}</a></span>{/if}
+					{#if data.website}<span>· <a href={data.website} style="color:{s.linkColor};text-decoration:none;word-break:break-word;overflow-wrap:anywhere;">{data.website}</a></span>{/if}
 				</div>
 
 				<!-- Logo + Social -->

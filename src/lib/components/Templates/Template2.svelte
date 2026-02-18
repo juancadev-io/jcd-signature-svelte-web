@@ -14,14 +14,14 @@
 	let fs = $derived(data.fontSize);
 </script>
 
-<table cellpadding="0" cellspacing="0" style="font-family:{data.fontFamily};font-size:{fs}px;color:{s.textColor};background:{s.containerBg};border-radius:{s.containerRadius};width:100%;max-width:400px;">
+<table cellpadding="0" cellspacing="0" style="font-family:{data.fontFamily};font-size:{fs}px;line-height:1.35;color:{s.textColor};background:{s.containerBg};border-radius:{s.containerRadius};width:100%;max-width:400px;">
 	<tbody>
 		<tr>
 			<td style="text-align:center;">
 				<!-- Avatar -->
 				<div style="margin-bottom:10px;">
 					{#if data.avatarUrl}
-						<img src={data.avatarUrl} alt={fullName} width="80" height="80" style="display:block;margin:0 auto;width:80px !important;height:80px !important;min-width:80px;min-height:80px;max-width:80px;max-height:80px;border-radius:9999px;object-fit:cover;{s.avatarBorder ? `border:${s.avatarBorder}` : ''}" />
+						<img src={data.avatarUrl} alt={fullName} width="80" height="80" style="display:block;margin:0 auto;width:80px !important;height:80px !important;min-width:80px;min-height:80px;max-width:80px;max-height:80px;border-radius:9999px;object-fit:cover;object-position:center center;box-sizing:border-box;{s.avatarBorder ? `border:${s.avatarBorder}` : ''}" />
 					{:else}
 						<div style="width:80px;height:80px;border-radius:50%;background:{data.primaryColor};display:inline-flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:#fff;">
 							{initials}
@@ -39,10 +39,10 @@
 
 				<!-- Contact -->
 				<div style="margin-top:8px;font-size:{fs - 2}px;color:{s.mutedColor};">
-					{#if data.email}<a href="mailto:{data.email}" style="color:{s.linkColor};text-decoration:none;">{data.email}</a><br/>{/if}
+					{#if data.email}<a href="mailto:{data.email}" style="color:{s.linkColor};text-decoration:none;word-break:break-word;overflow-wrap:anywhere;">{data.email}</a><br/>{/if}
 					{#if data.officePhone}<span>{data.officePhone}</span>{/if}
 					{#if data.mobilePhone}<span>{data.officePhone ? ' · ' : ''}{data.mobilePhone}</span>{/if}
-					{#if data.website}<br/><a href={data.website} style="color:{s.linkColor};text-decoration:none;">{data.website}</a>{/if}
+					{#if data.website}<br/><a href={data.website} style="color:{s.linkColor};text-decoration:none;word-break:break-word;overflow-wrap:anywhere;">{data.website}</a>{/if}
 				</div>
 
 				<!-- Logo + Social -->

@@ -64,7 +64,7 @@ function buildFontImport(data: SignatureData): string {
 function buildAvatar(data: SignatureData, fullName: string, initials: string, s: StyleVars, size = 80): string {
 	const borderStyle = s.avatarBorder !== 'none' ? `border:${s.avatarBorder};` : '';
 	if (data.avatarUrl) {
-		return `<img src="${data.avatarUrl}" alt="${fullName}" width="${size}" height="${size}" style="display:block;width:${size}px !important;height:${size}px !important;min-width:${size}px;min-height:${size}px;max-width:${size}px;max-height:${size}px;border-radius:9999px;object-fit:cover;${borderStyle}" />`;
+		return `<img src="${data.avatarUrl}" alt="${fullName}" width="${size}" height="${size}" style="display:block;width:${size}px !important;height:${size}px !important;min-width:${size}px;min-height:${size}px;max-width:${size}px;max-height:${size}px;border-radius:9999px;object-fit:cover;object-position:center center;box-sizing:border-box;${borderStyle}" />`;
 	}
 	return `<div style="width:${size}px;height:${size}px;border-radius:50%;background:${data.primaryColor};display:flex;align-items:center;justify-content:center;font-size:${Math.round(size * 0.35)}px;font-weight:700;color:#fff;font-family:${data.fontFamily};">${initials}</div>`;
 }
@@ -76,10 +76,10 @@ function buildLogo(data: SignatureData): string {
 
 function buildContact(data: SignatureData, s: StyleVars, fs: number): string {
 	const lines: string[] = [];
-	if (data.email) lines.push(`<a href="mailto:${data.email}" style="color:${s.linkColor};text-decoration:none;">${data.email}</a>`);
+	if (data.email) lines.push(`<a href="mailto:${data.email}" style="color:${s.linkColor};text-decoration:none;word-break:break-word;overflow-wrap:anywhere;">${data.email}</a>`);
 	const phones = [data.officePhone, data.mobilePhone].filter(Boolean).join(' &middot; ');
 	if (phones) lines.push(`<span>${phones}</span>`);
-	if (data.website) lines.push(`<a href="${data.website}" style="color:${s.linkColor};text-decoration:none;">${data.website}</a>`);
+	if (data.website) lines.push(`<a href="${data.website}" style="color:${s.linkColor};text-decoration:none;word-break:break-word;overflow-wrap:anywhere;">${data.website}</a>`);
 	return `<div style="font-size:${fs - 2}px;color:${s.mutedColor};">${lines.join('<br/>')}</div>`;
 }
 
@@ -125,7 +125,7 @@ function bottomRow(logo: string, social: string): string {
 
 function wrap(data: SignatureData, s: StyleVars, inner: string, fullWidth = false): string {
 	const w = fullWidth ? 'width:100%;' : '';
-	return `<table cellpadding="0" cellspacing="0" border="0" style="font-family:${data.fontFamily};font-size:${data.fontSize}px;color:${s.textColor};background:${s.containerBg};border-radius:${s.containerRadius};${w}max-width:500px;"><tr><td>${inner}</td></tr></table>`.trim();
+	return `<table cellpadding="0" cellspacing="0" border="0" style="font-family:${data.fontFamily};font-size:${data.fontSize}px;line-height:1.35;color:${s.textColor};background:${s.containerBg};border-radius:${s.containerRadius};${w}max-width:500px;"><tr><td>${inner}</td></tr></table>`.trim();
 }
 
 // ─── Layout builders ─────────────────────────────────────────────────────────
@@ -134,7 +134,7 @@ function buildLayout1(p: Parts): string {
 	const inner = `
 <table cellpadding="0" cellspacing="0" style="width:100%;">
 <tr>
-  <td style="padding-right:14px;vertical-align:top;width:80px;">${p.avatar}</td>
+	<td style="padding-right:14px;vertical-align:top;width:80px;">${p.avatar}</td>
   <td style="border-left:3px solid ${p.s.separatorColor};padding-left:14px;vertical-align:top;">
     <div style="font-size:${p.fs + 4}px;font-weight:700;color:${p.s.nameColor};">${p.fullName}</div>
     <div style="font-size:${p.fs - 1}px;color:${p.s.titleColor};margin-top:2px;">${p.titleLine}</div>
@@ -169,7 +169,7 @@ function buildLayout3(p: Parts): string {
 	const avatarSmall = buildAvatar(p.data, p.fullName, getInitials(p.data), p.s, 64);
 	const inner = `
 <table cellpadding="0" cellspacing="0"><tr>
-  <td style="padding-right:12px;vertical-align:middle;">${avatarSmall}</td>
+	<td style="padding-right:12px;vertical-align:middle;">${avatarSmall}</td>
   <td style="vertical-align:middle;">
     <div style="font-size:${p.fs + 4}px;font-weight:700;color:${p.s.nameColor};">${p.fullName}</div>
     <div style="font-size:${p.fs - 1}px;color:${p.s.titleColor};margin-top:1px;">${p.titleLine}</div>
@@ -193,7 +193,7 @@ function buildLayout4(p: Parts): string {
     ${p.companyLine}
     <div style="margin-top:6px;">${p.contact}</div>
   </td>
-  <td style="vertical-align:top;text-align:right;padding-left:14px;width:80px;">${p.avatar}</td>
+	<td style="vertical-align:top;text-align:right;padding-left:14px;width:80px;">${p.avatar}</td>
 </tr>
 <tr><td colspan="2">${bottomRow(p.logo, p.social)}</td></tr>
 ${p.cta ? `<tr><td colspan="2">${p.cta}</td></tr>` : ''}
@@ -212,7 +212,7 @@ ${p.companyLine}
 ${p.contact}
 <table cellpadding="0" cellspacing="0" style="width:100%;margin-top:10px;"><tr>
   <td style="vertical-align:bottom;">${p.logo ? `<div style="margin-bottom:6px;">${p.logo}</div>` : ''}${p.social}</td>
-  <td style="text-align:right;vertical-align:bottom;width:70px;">${avatarSmall}</td>
+	<td style="text-align:right;vertical-align:bottom;width:70px;">${avatarSmall}</td>
 </tr></table>
 ${p.cta}
 ${p.disclaimer}`;
@@ -228,7 +228,7 @@ function buildLayout6(p: Parts): string {
     <div style="font-size:${p.fs - 1}px;color:${p.s.titleColor};margin-top:2px;">${p.titleLine}</div>
     ${p.companyLine}
   </td>
-  <td style="vertical-align:top;text-align:right;padding-left:14px;width:70px;">${avatarSmall}</td>
+	<td style="vertical-align:top;text-align:right;padding-left:14px;width:70px;">${avatarSmall}</td>
 </tr>
 <tr><td colspan="2" style="padding-top:8px;">${p.contact}</td></tr>
 <tr><td colspan="2">${bottomRow(p.logo, p.social)}</td></tr>
