@@ -23,7 +23,7 @@ Part of the [Juancadev](https://juancamilofarfan.com) ecosystem · Built with Sv
 ## Getting Started
 
 ```bash
-git clone https://github.com/juancadev/jcd-signature-svelte-web
+git clone https://github.com/juancadev-io/jcd-signature-svelte-web
 cd jcd-signature-svelte-web
 npm install
 npm run dev
@@ -37,25 +37,38 @@ Open `http://localhost:5173` in your browser.
 
 ```
 jcd-signature-svelte-web/
-├── public/
-│   └── favicon.svg
+├── static/
+│   └── robots.txt
 ├── src/
-│   ├── components/
-│   │   ├── FormPanel/          # Step-by-step form fields
-│   │   ├── PreviewPanel/       # Real-time signature preview
-│   │   ├── Templates/          # Classic, Modern, Minimal
-│   │   └── ExportPanel/        # Export buttons and actions
-│   ├── stores/
-│   │   └── signatureStore.js   # Global state via Svelte stores
-│   ├── utils/
-│   │   ├── exportHTML.js       # Generates copyable HTML output
-│   │   └── exportPNG.js        # html2canvas logic for PNG export
-│   ├── App.svelte
-│   └── main.js
-├── vite.config.js
-├── tailwind.config.js
+│   ├── app.d.ts
+│   ├── app.html
+│   ├── lib/
+│   │   ├── assets/
+│   │   └── index.ts
+│   └── routes/
+│       ├── +layout.svelte
+│       ├── +page.svelte
+│       └── layout.css
+├── svelte.config.js
+├── vite.config.ts
+├── wrangler.jsonc
 └── package.json
 ```
+
+### Planned structure (not implemented yet)
+
+- [ ] `src/components/FormPanel/`
+- [ ] `src/components/PreviewPanel/`
+- [ ] `src/components/Templates/`
+- [ ] `src/components/ExportPanel/`
+- [ ] `src/stores/signatureStore.js`
+- [ ] `src/utils/exportHTML.js`
+- [ ] `src/utils/exportPNG.js`
+- [ ] `src/App.svelte`
+- [ ] `src/main.js`
+- [ ] `public/favicon.svg`
+- [ ] `tailwind.config.js`
+- [ ] `vite.config.js`
 
 ---
 
