@@ -1,6 +1,15 @@
 <script lang="ts">
 	import { signature } from '$lib/stores/signatureStore';
 	import type { Layout, Style } from '$lib/types/signature';
+	import {
+		DEFAULT_FONT_FAMILY,
+		PRESET_FONT_OPTIONS,
+		getFontFamilyFromGoogleFontUrl,
+		getGoogleFontHref,
+		isPresetFontFamily,
+		isValidGoogleFontUrl,
+		toCustomFontFamily
+	} from '$lib/utils/fontUtils';
 
 	const layouts: { id: Layout; label: string }[] = [
 		{ id: 1, label: 'Horizontal' },
@@ -15,6 +24,39 @@
 		{ id: 'classic', label: 'Classic' },
 		{ id: 'minimal', label: 'Minimal' }
 	];
+
+	const CUSTOM_FONT_OPTION = '__custom__';
+	const DEFAULT_CUSTOM_FONT_URL = 'https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap';
+
+	function handleFontPresetChange(event: Event) {
+		const value = (event.target as HTMLSelectElement).value;
+		if (value === CUSTOM_FONT_OPTION) {
+			signature.update((s) => {
+				const url = s.googleFontUrl || DEFAULT_CUSTOM_FONT_URL;
+				const fontName = getFontFamilyFromGoogleFontUrl(url) || 'Lato';
+				return {
+					...s,
+					googleFontUrl: url,
+					fontFamily: toCustomFontFamily(fontName)
+				};
+			});
+			return;
+		}
+
+		signature.update((s) => ({ ...s, fontFamily: value, googleFontUrl: '' }));
+	}
+
+	function handleCustomFontUrlInput(event: Event) {
+		const value = (event.target as HTMLInputElement).value;
+		signature.update((s) => {
+			const fontName = getFontFamilyFromGoogleFontUrl(value);
+			return {
+				...s,
+				googleFontUrl: value,
+				fontFamily: fontName ? toCustomFontFamily(fontName) : DEFAULT_FONT_FAMILY
+			};
+		});
+	}
 </script>
 
 <!-- Layout picker -->
@@ -134,13 +176,31 @@
 <!-- Font -->
 <div>
 	<label for="design-font-family" class="block text-xs font-medium text-gray-600 mb-2">Font</label>
-	<select id="design-font-family" bind:value={$signature.fontFamily} class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400">
-		<option value="Arial, sans-serif">Arial</option>
-		<option value="Georgia, serif">Georgia</option>
-		<option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
-		<option value="Verdana, sans-serif">Verdana</option>
-		<option value="'Courier New', monospace">Courier New</option>
+	<select
+		id="design-font-family"
+		value={isPresetFontFamily($signature.fontFamily) ? $signature.fontFamily : CUSTOM_FONT_OPTION}
+		onchange={handleFontPresetChange}
+		class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+	>
+		{#each PRESET_FONT_OPTIONS as font}
+			<option value={font.value}>{font.label}</option>
+		{/each}
+		<option value={CUSTOM_FONT_OPTION}>Custom</option>
 	</select>
+	{#if !isPresetFontFamily($signature.fontFamily)}
+		<input
+			type="text"
+			value={$signature.googleFontUrl || getGoogleFontHref($signature.fontFamily) || ''}
+			oninput={handleCustomFontUrlInput}
+			placeholder="https://fonts.googleapis.com/css2?family=..."
+			class="mt-2 w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+		/>
+		<p class="mt-1 text-[11px] {$signature.googleFontUrl && !isValidGoogleFontUrl($signature.googleFontUrl) ? 'text-red-500' : 'text-gray-500'}">
+			{$signature.googleFontUrl && !isValidGoogleFontUrl($signature.googleFontUrl)
+				? 'URL inválida de Google Fonts.'
+				: 'Pega la URL completa de Google Fonts (css2?family=...).'}
+		</p>
+	{/if}
 </div>
 
 <!-- Font size -->

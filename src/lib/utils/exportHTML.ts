@@ -8,6 +8,7 @@ import type { SignatureData } from '$lib/types/signature';
 import { getFullName, getInitials } from '$lib/utils/templateHelpers';
 import { getStyleVars, type StyleVars } from '$lib/utils/styleConfig';
 import { socialEntries } from '$lib/utils/socialIcons';
+import { getGoogleFontHref } from '$lib/utils/fontUtils';
 
 export function generateHTML(data: SignatureData): string {
 	const s = getStyleVars(data);
@@ -25,14 +26,15 @@ export function generateHTML(data: SignatureData): string {
 	const companyLine = data.company ? `<div style="font-size:${fs - 2}px;color:${s.mutedColor};margin-top:1px;">${data.company}</div>` : '';
 
 	const p = { data, s, fs, fullName, avatar, logo, contact, social, cta, disclaimer, titleLine, companyLine };
+	const fontImport = buildFontImport(data);
 
 	switch (data.layout) {
-		case 2: return buildLayout2(p);
-		case 3: return buildLayout3(p);
-		case 4: return buildLayout4(p);
-		case 5: return buildLayout5(p);
-		case 6: return buildLayout6(p);
-		default: return buildLayout1(p);
+		case 2: return `${fontImport}${buildLayout2(p)}`;
+		case 3: return `${fontImport}${buildLayout3(p)}`;
+		case 4: return `${fontImport}${buildLayout4(p)}`;
+		case 5: return `${fontImport}${buildLayout5(p)}`;
+		case 6: return `${fontImport}${buildLayout6(p)}`;
+		default: return `${fontImport}${buildLayout1(p)}`;
 	}
 }
 
@@ -51,6 +53,12 @@ interface Parts {
 	disclaimer: string;
 	titleLine: string;
 	companyLine: string;
+}
+
+function buildFontImport(data: SignatureData): string {
+	const href = getGoogleFontHref(data.fontFamily, data.googleFontUrl);
+	if (!href) return '';
+	return `<style>@import url('${href}');</style>`;
 }
 
 function buildAvatar(data: SignatureData, fullName: string, initials: string, s: StyleVars, size = 80): string {

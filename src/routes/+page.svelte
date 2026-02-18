@@ -7,12 +7,19 @@
 	import FormPanel from '$lib/components/FormPanel/FormPanel.svelte';
 	import PreviewPanel from '$lib/components/PreviewPanel/PreviewPanel.svelte';
 	import ExportPanel from '$lib/components/ExportPanel/ExportPanel.svelte';
+	import { signature } from '$lib/stores/signatureStore';
+	import { getGoogleFontHref } from '$lib/utils/fontUtils';
 	let previewEl: HTMLDivElement;
 </script>
 
 <svelte:head>
 	<title>Email Signature Generator · Juancadev</title>
 	<meta name="description" content="Create professional email signatures for free. Export HTML for Gmail and PNG for mobile clients." />
+	{#if getGoogleFontHref($signature.fontFamily, $signature.googleFontUrl)}
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+		<link rel="stylesheet" href={getGoogleFontHref($signature.fontFamily, $signature.googleFontUrl)} />
+	{/if}
 </svelte:head>
 
 <div class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50/30">

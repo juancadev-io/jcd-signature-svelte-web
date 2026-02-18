@@ -33,6 +33,7 @@ const _defaults: SignatureData = {
 	textColor: '#374151',
 	linkColor: '#6366f1',
 	fontFamily: 'Arial, sans-serif',
+	googleFontUrl: '',
 	fontSize: 14,
 
 	disclaimer: 'This email and any attachments are confidential and intended solely for the use of the individual to whom they are addressed. If you have received this email in error, please notify the sender immediately and delete it from your system.'

@@ -36,6 +36,7 @@ export interface SignatureData {
 	textColor: string;
 	linkColor: string;
 	fontFamily: string;
+	googleFontUrl: string;
 	fontSize: number;
 
 	disclaimer: string;
