@@ -1,42 +1,86 @@
-# sv
+# jcd-signature-svelte-web
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+> Open source email signature generator — 100% frontend, no backend required.  
+> Export HTML ready for Gmail / Outlook and PNG optimized for mobile clients.
 
-## Creating a project
+Part of the [Juancadev](https://juancamilofarfan.com) ecosystem · Built with Svelte + Vite + TailwindCSS.
 
-If you're seeing this, you've probably already done this step. Congrats!
+🔗 **Live:** [signature.juancamilofarfan.com](https://signature.juancamilofarfan.com)
 
-```sh
-# create a new project
-npx sv create my-app
-```
+---
 
-To recreate this project with the same configuration:
+## Tech Stack
 
-```sh
-# recreate this project
-npx sv create --template minimal --types ts --add prettier eslint tailwindcss="plugins:typography,forms" sveltekit-adapter="adapter:cloudflare+cfTarget:pages" --install npm jcd-signature-svelte-web
-```
+| Tool          | Role                         |
+|---------------|------------------------------|
+| Svelte + Vite | Framework and bundler        |
+| Tailwind CSS  | Utility-first styling        |
+| html2canvas   | PNG export                   |
+| Lucide Svelte | Icons for social and contact |
 
-## Developing
+---
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Getting Started
 
-```sh
+```bash
+git clone https://github.com/juancadev/jcd-signature-svelte-web
+cd jcd-signature-svelte-web
+npm install
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
+Open `http://localhost:5173` in your browser.
 
-To create a production version of your app:
+---
 
-```sh
-npm run build
+## Project Structure
+
+```
+jcd-signature-svelte-web/
+├── public/
+│   └── favicon.svg
+├── src/
+│   ├── components/
+│   │   ├── FormPanel/          # Step-by-step form fields
+│   │   ├── PreviewPanel/       # Real-time signature preview
+│   │   ├── Templates/          # Classic, Modern, Minimal
+│   │   └── ExportPanel/        # Export buttons and actions
+│   ├── stores/
+│   │   └── signatureStore.js   # Global state via Svelte stores
+│   ├── utils/
+│   │   ├── exportHTML.js       # Generates copyable HTML output
+│   │   └── exportPNG.js        # html2canvas logic for PNG export
+│   ├── App.svelte
+│   └── main.js
+├── vite.config.js
+├── tailwind.config.js
+└── package.json
 ```
 
-You can preview the production build with `npm run preview`.
+---
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+## Roadmap
+
+- [ ] More signature templates
+- [ ] Multiple saved signatures
+- [ ] Dark mode preview
+- [ ] i18n (Spanish / English)
+- [ ] Calendly CTA button integration
+- [ ] Custom banner generator
+
+---
+
+## Contributing
+
+Pull requests are welcome. Please open an issue first for major changes.
+
+```bash
+# Fork the repo → create your branch → open a PR to main
+git checkout -b feature/new-template
+```
+
+---
+
+## License
+
+MIT · Made with love by [Juancadev](https://juancamilofarfan.com)
