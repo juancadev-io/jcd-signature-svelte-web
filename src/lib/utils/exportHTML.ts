@@ -142,9 +142,10 @@ ${p.disclaimer ? `<tr><td colspan="2">${p.disclaimer}</td></tr>` : ''}
 }
 
 function buildLayout2(p: Parts): string {
+	const centeredAvatar = p.data.avatarUrl ? p.avatar.replace('display:block;', 'display:block;margin:0 auto;') : p.avatar;
 	const inner = `
 <div style="text-align:center;">
-  <div style="margin-bottom:10px;">${p.avatar}</div>
+	<div style="margin-bottom:10px;">${centeredAvatar}</div>
   <div style="font-size:${p.fs + 4}px;font-weight:700;color:${p.s.nameColor};">${p.fullName}</div>
   <div style="font-size:${p.fs - 1}px;color:${p.s.titleColor};margin-top:2px;">${p.titleLine}</div>
   ${p.companyLine}

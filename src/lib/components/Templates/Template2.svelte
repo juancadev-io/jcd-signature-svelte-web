@@ -21,7 +21,7 @@
 				<!-- Avatar -->
 				<div style="margin-bottom:10px;">
 					{#if data.avatarUrl}
-						<img src={data.avatarUrl} alt={fullName} width="80" height="80" style="display:block;width:80px !important;height:80px !important;min-width:80px;min-height:80px;max-width:80px;max-height:80px;border-radius:9999px;object-fit:cover;{s.avatarBorder ? `border:${s.avatarBorder}` : ''}" />
+						<img src={data.avatarUrl} alt={fullName} width="80" height="80" style="display:block;margin:0 auto;width:80px !important;height:80px !important;min-width:80px;min-height:80px;max-width:80px;max-height:80px;border-radius:9999px;object-fit:cover;{s.avatarBorder ? `border:${s.avatarBorder}` : ''}" />
 					{:else}
 						<div style="width:80px;height:80px;border-radius:50%;background:{data.primaryColor};display:inline-flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:#fff;">
 							{initials}
