@@ -2,8 +2,8 @@
 
 Open-source email signature generator (100% frontend, no backend).
 
-- Export **HTML** ready for Gmail / Outlook
-- Export **PNG** optimized for mobile clients
+- Export **HTML** ready for Gmail/Outlook
+- Export **PNG** for mobile clients
 - Save and load configuration as **JSON**
 
 Part of the [Juancadev](https://juancamilofarfan.com) ecosystem.
@@ -12,39 +12,46 @@ Part of the [Juancadev](https://juancamilofarfan.com) ecosystem.
 
 ---
 
-## Current status (implemented)
+## Current status
 
 - ✅ Section-based editor: Personal, Contact, Social, Design, Extras
 - ✅ Real-time preview
-- ✅ **6 signature layouts**
+- ✅ **6 templates** (`Template1` to `Template6`)
 - ✅ **2 visual styles** (`classic`, `minimal`)
-- ✅ Typography, font size, and color controls
-- ✅ Avatar/logo upload (file or URL)
+- ✅ Typography, size, and color controls
+- ✅ Avatar and logo via file upload or URL
 - ✅ Social links (LinkedIn, X/Twitter, GitHub, Instagram, YouTube, WhatsApp)
 - ✅ Optional CTA (text + URL)
 - ✅ Editable legal disclaimer
 - ✅ Copy HTML to clipboard
 - ✅ Download PNG
-- ✅ Save configuration (`.json`)
-- ✅ Load configuration (`.json`)
+- ✅ Save/load configuration (`.json`)
 - ✅ Reset to defaults
 
 ---
 
 ## Tech stack
 
-| Tool | Role |
+| Technology | Role |
 |---|---|
-| SvelteKit 2 + Svelte 5 | Framework |
-| Vite 7 | Bundler / dev server |
+| SvelteKit 2 + Svelte 5 | Main framework |
+| Vite 7 | Dev server and build |
 | Tailwind CSS 4 | Styling |
-| TypeScript | Domain typing |
-| html2canvas | PNG export |
-| Wrangler + adapter-cloudflare | Cloudflare build and preview |
+| TypeScript | Typing and maintainability |
+| `html-to-image` | PNG export |
+| Wrangler + `@sveltejs/adapter-cloudflare` | Cloudflare Pages preview/build |
+| ESLint + Prettier | Linting and formatting |
 
 ---
 
-## Installation & development
+## Requirements
+
+- Node.js 20+
+- npm 10+
+
+---
+
+## Installation and local development
 
 ```bash
 git clone https://github.com/juancadev-io/jcd-signature-svelte-web
@@ -60,14 +67,14 @@ Open: `http://localhost:5173`
 ## Available scripts
 
 ```bash
-npm run dev          # development mode
-npm run build        # production build
-npm run preview      # wrangler preview (Cloudflare)
-npm run check        # type checks (svelte-check)
-npm run check:watch  # watch mode checks
-npm run lint         # prettier + eslint
-npm run format       # auto-format
-npm run gen          # generate wrangler types
+npm run dev          # Development mode (Vite)
+npm run build        # Production build
+npm run preview      # Preview with Wrangler on port 4173
+npm run check        # Type-check with svelte-check
+npm run check:watch  # Type-check in watch mode
+npm run lint         # prettier --check + eslint
+npm run format       # prettier --write
+npm run gen          # Generate Wrangler types
 ```
 
 ---
@@ -114,6 +121,7 @@ jcd-signature-svelte-web/
 │   │   │   ├── colorContrast.ts
 │   │   │   ├── exportHTML.ts
 │   │   │   ├── exportPNG.ts
+│   │   │   ├── fontUtils.ts
 │   │   │   ├── socialIcons.ts
 │   │   │   ├── styleConfig.ts
 │   │   │   └── templateHelpers.ts
@@ -136,18 +144,10 @@ jcd-signature-svelte-web/
 ## Functional flow
 
 1. The user edits data in the form.
-2. Global state (`signatureStore`) updates in real time.
-3. `PreviewPanel` renders the selected template.
-4. `ExportPanel` handles HTML copy, PNG download, and JSON config management.
+2. The global state (`signatureStore`) updates in real time.
+3. `PreviewPanel` renders the signature based on template/style.
+4. `ExportPanel` handles HTML copy, PNG export, and JSON config management.
 
----
-
-## Roadmap
-
-- [ ] More templates
-- [ ] Multiple saved signatures
-- [ ] i18n (ES/EN)
-- [ ] Export UX and cross-client compatibility improvements
 
 ---
 
@@ -156,11 +156,11 @@ jcd-signature-svelte-web/
 PRs are welcome. For major changes, please open an issue first.
 
 ```bash
-git checkout -b feature/your-change-name
+git checkout -b feature/my-change
 ```
 
 ---
 
 ## License
 
-MIT · Made with love by [Juancadev](https://juancamilofarfan.com)
+MIT · Made with ❤️ by [Juancadev](https://juancamilofarfan.com)
