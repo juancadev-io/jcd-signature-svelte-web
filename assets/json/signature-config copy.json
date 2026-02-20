@@ -1,0 +1,32 @@
+{
+  "firstName": "María Fernanda",
+  "lastName": "Rojas",
+  "jobTitle": "Senior Corporate Lawyer",
+  "department": "Mergers & Acquisitions",
+  "company": "Rojas & Asociados",
+  "email": "maria.rojas@rojaslegal.com",
+  "officePhone": "+57 601 555 1234",
+  "mobilePhone": "",
+  "website": "https://rojaslegal.com",
+  "avatarUrl": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e",
+  "logoUrl": "",
+  "social": {
+    "linkedin": "https://linkedin.com",
+    "twitter": "",
+    "github": "",
+    "instagram": "",
+    "youtube": "",
+    "whatsapp": ""
+  },
+  "ctaText": "Schedule a consultation",
+  "ctaUrl": "https://rojaslegal.com/contact",
+  "layout": 1,
+  "style": "classic",
+  "primaryColor": "#1E3A8A",
+  "textColor": "#1F2937",
+  "linkColor": "#1E3A8A",
+  "fontFamily": "Georgia, serif",
+  "googleFontUrl": "",
+  "fontSize": 14,
+  "disclaimer": "This communication may contain privileged legal information intended only for the recipient."
+}

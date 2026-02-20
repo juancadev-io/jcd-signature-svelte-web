@@ -1,0 +1,32 @@
+{
+  "firstName": "Dr. Andrés",
+  "lastName": "Morales",
+  "jobTitle": "Cardiologist",
+  "department": "Cardiology Department",
+  "company": "Clínica Vida",
+  "email": "andres.morales@clinicavida.com",
+  "officePhone": "+57 601 444 8899",
+  "mobilePhone": "",
+  "website": "https://clinicavida.com",
+  "avatarUrl": "https://images.unsplash.com/photo-1612349316228-5942a9b489c2",
+  "logoUrl": "",
+  "social": {
+    "linkedin": "",
+    "twitter": "",
+    "github": "",
+    "instagram": "",
+    "youtube": "",
+    "whatsapp": ""
+  },
+  "ctaText": "Book an appointment",
+  "ctaUrl": "https://clinicavida.com/appointments",
+  "layout": 3,
+  "style": "minimal",
+  "primaryColor": "#0EA5E9",
+  "textColor": "#1F2937",
+  "linkColor": "#0EA5E9",
+  "fontFamily": "Arial, sans-serif",
+  "googleFontUrl": "",
+  "fontSize": 14,
+  "disclaimer": "This email may contain confidential medical information protected by law."
+}

@@ -1,0 +1,32 @@
+{
+  "firstName": "Daniel",
+  "lastName": "Castillo",
+  "jobTitle": "IT Operations Manager",
+  "department": "Technology",
+  "company": "Global Enterprise Group",
+  "email": "daniel.castillo@geg.com",
+  "officePhone": "+1 212 555 8899",
+  "mobilePhone": "",
+  "website": "https://geg.com",
+  "avatarUrl": "https://images.unsplash.com/photo-1560250097-0b93528c311a",
+  "logoUrl": "",
+  "social": {
+    "linkedin": "https://linkedin.com",
+    "twitter": "",
+    "github": "",
+    "instagram": "",
+    "youtube": "",
+    "whatsapp": ""
+  },
+  "ctaText": "Visit our website",
+  "ctaUrl": "https://geg.com",
+  "layout": 6,
+  "style": "classic",
+  "primaryColor": "#374151",
+  "textColor": "#111827",
+  "linkColor": "#2563EB",
+  "fontFamily": "Arial, sans-serif",
+  "googleFontUrl": "",
+  "fontSize": 13,
+  "disclaimer": "This message is intended only for the designated recipient and may contain confidential information."
+}
