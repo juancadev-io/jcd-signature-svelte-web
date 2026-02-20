@@ -8,7 +8,77 @@ Open-source email signature generator (100% frontend, no backend).
 
 Part of the [Juancadev](https://juancamilofarfan.com) ecosystem.
 
-🔗 **Live:** [signature.juancamilofarfan.com](https://signature.juancamilofarfan.com)
+
+## Current status
+
+---
+
+## Ejemplos y Capturas de Pantalla
+
+
+### Capturas de pantalla
+
+Vista de la aplicación:
+
+![Vista principal](assets/img/vista-principal.png)
+
+Panel de exportación:
+
+![Panel de exportación](assets/img/panel-exportacion.png)
+
+#### Resultados posibles (firmas generadas)
+
+Ejemplos de firmas generadas con diferentes configuraciones:
+
+![Firma Daniel Castillo](assets/img/signature-daniel-castillo.png)
+![Firma Dr. Andrés Morales](assets/img/signature-dr.-andrés-morales.png)
+![Firma Laura Gómez](assets/img/signature-laura-gómez.png)
+![Firma María Fernanda Rojas](assets/img/signature-maría-fernanda-rojas.png)
+
+### Archivos JSON de ejemplo
+
+Puedes encontrar archivos de configuración de firma en `assets/json/`. Aquí tienes un ejemplo:
+
+```json
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "jobTitle": "Full Stack Developer",
+  "department": "",
+  "company": "Tech Company",
+  "email": "hello@techcompany.com",
+  "officePhone": "",
+  "mobilePhone": "",
+  "website": "https://techcompany.com",
+  "avatarUrl": "",
+  "logoUrl": "",
+  "social": {
+    "linkedin": "",
+    "twitter": "",
+    "github": "",
+    "instagram": "",
+    "youtube": "",
+    "whatsapp": ""
+  },
+  "ctaText": "",
+  "ctaUrl": "",
+  "layout": 1,
+  "style": "classic",
+  "primaryColor": "#6366f1",
+  "textColor": "#374151",
+  "linkColor": "#6366f1",
+  "fontFamily": "Arial, sans-serif",
+  "googleFontUrl": "",
+  "fontSize": 14,
+  "disclaimer": "This email and any attachments are confidential and intended solely for the use of the individual to whom they are addressed. If you have received this email in error, please notify the sender immediately and delete it from your system."
+}
+```
+
+Archivos completos:
+- [signature-config copy.json](assets/json/signature-config%20copy.json)
+- [signature-daniel-castillo.json](assets/json/signature-daniel-castillo.json)
+- [signature-dr.-andrés-morales.json](assets/json/signature-dr.-andrés-morales.json)
+- [signature-laura-gómez.json](assets/json/signature-laura-gómez.json)
 
 ---
 
