@@ -1,43 +1,89 @@
-# jcd-signature-svelte-web
+# jcd-signature-svelte-web — Privacy-first Email Signature Generator
 
-Open-source email signature generator (100% frontend, no backend).
+![MIT License](https://img.shields.io/badge/license-MIT-green)
+![SvelteKit](https://img.shields.io/badge/SvelteKit-5-orange)
+![Cloudflare](https://img.shields.io/badge/Deploy-Cloudflare-F38020)
+![Open Source](https://img.shields.io/badge/Open%20Source-Yes-brightgreen)
 
-- Export **HTML** ready for Gmail/Outlook
-- Export **PNG** for mobile clients
-- Save and load configuration as **JSON**
+Open-source email signature generator — **100% frontend, no backend, no data storage.**
 
-Part of the [Juancadev](https://juancamilofarfan.com) ecosystem.
+Build privacy-first, fully customizable email signatures without relying on external services.
 
+🌐 Live demo:  
+https://signature.juancamilofarfan.com
 
-## Current status
+⭐ If this project helps you, consider giving it a star on GitHub.
 
 ---
 
-## Ejemplos y Capturas de Pantalla
+## ✨ Why this project?
 
+Most online email signature generators:
 
-### Capturas de pantalla
+- Store your data on servers  
+- Require accounts  
+- Limit customization  
+- Produce incompatible HTML  
 
-Vista de la aplicación:
+This project is different:
 
-![Vista principal](assets/img/vista-principal.png)
+- ✅ 100% frontend  
+- ✅ No backend  
+- ✅ No database  
+- ✅ No tracking  
+- ✅ No information is stored anywhere  
 
-Panel de exportación:
+Your data stays in your browser.  
+You can export it as JSON and load it again anytime.
 
-![Panel de exportación](assets/img/panel-exportacion.png)
+Privacy-first by design.
 
-#### Resultados posibles (firmas generadas)
+---
 
-Ejemplos de firmas generadas con diferentes configuraciones:
+## 🚀 Features
 
-![Firma Daniel Castillo](assets/img/signature-daniel-castillo.png)
-![Firma Dr. Andrés Morales](assets/img/signature-dr.-andrés-morales.png)
-![Firma Laura Gómez](assets/img/signature-laura-gómez.png)
-![Firma María Fernanda Rojas](assets/img/signature-maría-fernanda-rojas.png)
+- Export **HTML** ready for Gmail / Outlook
+- Export **PNG** optimized for mobile clients
+- Save and load configuration as **JSON**
+- 6 templates
+- 2 visual styles (`classic`, `minimal`)
+- Typography, font size and color controls
+- Avatar/logo via file upload or URL
+- Social links (LinkedIn, X/Twitter, GitHub, Instagram, YouTube, WhatsApp)
+- Optional CTA
+- Editable legal disclaimer
+- Reset to defaults
 
-### Archivos JSON de ejemplo
+Works for:
 
-Puedes encontrar archivos de configuración de firma en `assets/json/`. Aquí tienes un ejemplo:
+⚖️ Legal  
+🏥 Healthcare  
+🌱 NGOs  
+🏢 Corporate  
+👨‍💻 Developers  
+
+---
+
+## 📸 Screenshots
+
+Main application view
+
+![Main application view](assets/img/vista-principal.png)
+
+Export panel
+
+![Export panel](assets/img/panel-exportacion.png)
+
+Example signatures
+
+![Signature Daniel Castillo](assets/img/signature-daniel-castillo.png)
+![Signature Dr. Andrés Morales](assets/img/signature-dr.-andrés-morales.png)
+![Signature Laura Gómez](assets/img/signature-laura-gómez.png)
+![Signature María Fernanda Rojas](assets/img/signature-maría-fernanda-rojas.png)
+
+## Example JSON files
+
+You can find signature configuration files in `assets/json/`. Here's an example:
 
 ```json
 {
@@ -74,54 +120,62 @@ Puedes encontrar archivos de configuración de firma en `assets/json/`. Aquí ti
 }
 ```
 
-Archivos completos:
-- [signature-config copy.json](assets/json/signature-config%20copy.json)
+Complete files:
+
+- [signature-maría-fernanda-rojas.json](assets/json/signature-maría-fernanda-rojas.json)
 - [signature-daniel-castillo.json](assets/json/signature-daniel-castillo.json)
 - [signature-dr.-andrés-morales.json](assets/json/signature-dr.-andrés-morales.json)
 - [signature-laura-gómez.json](assets/json/signature-laura-gómez.json)
 
 ---
 
-## Current status
 
-- ✅ Section-based editor: Personal, Contact, Social, Design, Extras
-- ✅ Real-time preview
-- ✅ **6 templates** (`Template1` to `Template6`)
-- ✅ **2 visual styles** (`classic`, `minimal`)
-- ✅ Typography, size, and color controls
-- ✅ Avatar and logo via file upload or URL
-- ✅ Social links (LinkedIn, X/Twitter, GitHub, Instagram, YouTube, WhatsApp)
-- ✅ Optional CTA (text + URL)
-- ✅ Editable legal disclaimer
-- ✅ Copy HTML to clipboard
-- ✅ Download PNG
-- ✅ Save/load configuration (`.json`)
-- ✅ Reset to defaults
+## 🔐 Data & Privacy
+
+This tool does **not**:
+
+- Save data in a database
+- Send requests to a server
+- Store information remotely
+
+All configuration lives in the browser session.
+
+You can:
+
+- Export configuration as `.json`
+- Load it anytime
+- Edit your signature whenever needed
+
+Total control.
 
 ---
 
-## Tech stack
+## 🧠 Architecture overview
+
+1. Form updates global state (`signatureStore`)
+2. Reactive rendering updates `PreviewPanel`
+3. Templates are isolated components
+4. `ExportPanel` handles HTML, PNG and JSON operations
+
+State is serializable and export logic is decoupled from UI.
+
+---
+
+## 🛠 Tech stack
 
 | Technology | Role |
 |---|---|
 | SvelteKit 2 + Svelte 5 | Main framework |
 | Vite 7 | Dev server and build |
 | Tailwind CSS 4 | Styling |
-| TypeScript | Typing and maintainability |
-| `html-to-image` | PNG export |
-| Wrangler + `@sveltejs/adapter-cloudflare` | Cloudflare Pages preview/build |
-| ESLint + Prettier | Linting and formatting |
+| TypeScript | Type safety |
+| html-to-image | PNG export |
+| Wrangler + adapter-cloudflare | Deployment |
+| ESLint + Prettier | Code quality |
 
 ---
 
-## Requirements
-
-- Node.js 20+
-- npm 10+
-
----
-
-## Installation and local development
+## 📦 Installation
 
 ```bash
 git clone https://github.com/juancadev-io/jcd-signature-svelte-web
@@ -130,107 +184,35 @@ npm install
 npm run dev
 ```
 
-Open: `http://localhost:5173`
+Open: http://localhost:5173
 
 ---
 
-## Available scripts
+## 🤝 Contributing
 
-```bash
-npm run dev          # Development mode (Vite)
-npm run build        # Production build
-npm run preview      # Preview with Wrangler on port 4173
-npm run check        # Type-check with svelte-check
-npm run check:watch  # Type-check in watch mode
-npm run lint         # prettier --check + eslint
-npm run format       # prettier --write
-npm run gen          # Generate Wrangler types
-```
+Contributions are welcome.
+
+1. Fork the repo
+2. Create a feature branch
+3. Open a PR
+
+For major changes, please open an issue first.
 
 ---
 
-## Project structure
+## ⭐ Support the project
 
-```text
-jcd-signature-svelte-web/
-├── static/
-│   └── robots.txt
-├── src/
-│   ├── app.d.ts
-│   ├── app.html
-│   ├── lib/
-│   │   ├── assets/
-│   │   ├── components/
-│   │   │   ├── ExportPanel/
-│   │   │   │   └── ExportPanel.svelte
-│   │   │   ├── FormPanel/
-│   │   │   │   ├── FormPanel.svelte
-│   │   │   │   ├── SectionWrapper.svelte
-│   │   │   │   └── sections/
-│   │   │   │       ├── ContactSection.svelte
-│   │   │   │       ├── DesignSection.svelte
-│   │   │   │       ├── ExtrasSection.svelte
-│   │   │   │       ├── PersonalSection.svelte
-│   │   │   │       └── SocialSection.svelte
-│   │   │   ├── PreviewPanel/
-│   │   │   │   └── PreviewPanel.svelte
-│   │   │   └── Templates/
-│   │   │       ├── SocialLinks.svelte
-│   │   │       ├── Template1.svelte
-│   │   │       ├── Template2.svelte
-│   │   │       ├── Template3.svelte
-│   │   │       ├── Template4.svelte
-│   │   │       ├── Template5.svelte
-│   │   │       └── Template6.svelte
-│   │   ├── stores/
-│   │   │   ├── defaults.ts
-│   │   │   └── signatureStore.ts
-│   │   ├── types/
-│   │   │   └── signature.ts
-│   │   ├── utils/
-│   │   │   ├── colorContrast.ts
-│   │   │   ├── exportHTML.ts
-│   │   │   ├── exportPNG.ts
-│   │   │   ├── fontUtils.ts
-│   │   │   ├── socialIcons.ts
-│   │   │   ├── styleConfig.ts
-│   │   │   └── templateHelpers.ts
-│   │   └── index.ts
-│   └── routes/
-│       ├── +layout.svelte
-│       ├── +page.svelte
-│       └── layout.css
-├── eslint.config.js
-├── package.json
-├── README.md
-├── svelte.config.js
-├── tsconfig.json
-├── vite.config.ts
-└── wrangler.jsonc
-```
+If you find this useful:
 
----
+- Give it a ⭐ on GitHub
+- Share it with your team
+- Open an issue with suggestions
+- Submit a PR
 
-## Functional flow
-
-1. The user edits data in the form.
-2. The global state (`signatureStore`) updates in real time.
-3. `PreviewPanel` renders the signature based on template/style.
-4. `ExportPanel` handles HTML copy, PNG export, and JSON config management.
-
-
----
-
-## Contributing
-
-PRs are welcome. For major changes, please open an issue first.
-
-```bash
-git checkout -b feature/my-change
-```
+Let’s build a flexible, privacy-first signature tool together.
 
 ---
 
 ## License
 
-MIT · Made with ❤️ by [Juancadev](https://juancamilofarfan.com)
+MIT · Made with ❤️ by Juancadev
