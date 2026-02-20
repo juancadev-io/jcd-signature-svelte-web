@@ -1,6 +1,6 @@
 <!--
   +page.svelte
-  Main page — two-column layout: form on the left, preview + export on the right.
+  Main page: editor panel on the left, preview and export on the right.
   Responsive: stacks vertically on mobile.
 -->
 <script lang="ts">
@@ -9,11 +9,12 @@
 	import ExportPanel from '$lib/components/ExportPanel/ExportPanel.svelte';
 	import { signature } from '$lib/stores/signatureStore';
 	import { getGoogleFontHref } from '$lib/utils/fontUtils';
+
 	let previewEl: HTMLDivElement;
 </script>
 
 <svelte:head>
-	<title>Email Signature Generator · Juancadev</title>
+	<title>Email Signature Generator - Juancadev</title>
 	<meta
 		name="description"
 		content="Create professional email signatures for free. Export HTML for Gmail and PNG for mobile clients."
@@ -39,14 +40,23 @@
 					>
 				</p>
 			</div>
-			<a
-				href="https://github.com/juancadev-io/jcd-signature-svelte-web"
-				target="_blank"
-				rel="noopener noreferrer"
-				class="flex items-center gap-1.5 rounded-lg border border-gray-200 px-3 py-1.5 text-xs text-gray-500 transition-colors hover:bg-gray-50 hover:text-gray-800"
-			>
-				⭐ GitHub
-			</a>
+
+			<div class="flex items-center gap-2">
+				<a
+					href="/guia"
+					class="rounded-lg border border-indigo-200 px-3 py-1.5 text-xs font-medium text-indigo-600 transition-colors hover:bg-indigo-50"
+				>
+					Guia de uso
+				</a>
+				<a
+					href="https://github.com/juancadev-io/jcd-signature-svelte-web"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="flex items-center gap-1.5 rounded-lg border border-gray-200 px-3 py-1.5 text-xs text-gray-500 transition-colors hover:bg-gray-50 hover:text-gray-800"
+				>
+					Star GitHub
+				</a>
+			</div>
 		</div>
 	</header>
 
@@ -64,7 +74,7 @@
 	</main>
 
 	<footer class="py-8 text-center text-xs text-gray-400">
-		Open source · MIT License ·
+		Open source - MIT License -
 		<a href="https://juancamilofarfan.com" class="text-indigo-400 hover:underline"
 			>juancamilofarfan.com</a
 		>

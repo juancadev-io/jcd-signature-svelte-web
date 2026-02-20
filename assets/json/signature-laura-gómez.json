@@ -1,0 +1,32 @@
+{
+  "firstName": "Laura",
+  "lastName": "Gómez",
+  "jobTitle": "Program Director",
+  "department": "Community Outreach",
+  "company": "Fundación Esperanza Verde",
+  "email": "laura.gomez@esperanzaverde.org",
+  "officePhone": "",
+  "mobilePhone": "+57 320 123 4567",
+  "website": "https://esperanzaverde.org",
+  "avatarUrl": "https://images.unsplash.com/photo-1502685104226-ee32379fefbe",
+  "logoUrl": "",
+  "social": {
+    "linkedin": "https://linkedin.com",
+    "twitter": "",
+    "github": "",
+    "instagram": "https://instagram.com",
+    "youtube": "",
+    "whatsapp": ""
+  },
+  "ctaText": "Support our mission",
+  "ctaUrl": "https://esperanzaverde.org/donate",
+  "layout": 4,
+  "style": "minimal",
+  "primaryColor": "#16A34A",
+  "textColor": "#1F2937",
+  "linkColor": "#16A34A",
+  "fontFamily": "Lato, sans-serif",
+  "googleFontUrl": "https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap",
+  "fontSize": 14,
+  "disclaimer": ""
+}
