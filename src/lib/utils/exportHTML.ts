@@ -23,18 +23,39 @@ export function generateHTML(data: SignatureData): string {
 	const cta = buildCta(data, s, fs);
 	const disclaimer = buildDisclaimer(data, s, fs);
 	const titleLine = `${data.jobTitle}${data.department ? ' &middot; ' + data.department : ''}`;
-	const companyLine = data.company ? `<div style="font-size:${fs - 2}px;color:${s.mutedColor};margin-top:1px;">${data.company}</div>` : '';
+	const companyLine = data.company
+		? `<div style="font-size:${fs - 2}px;color:${s.mutedColor};margin-top:1px;">${data.company}</div>`
+		: '';
 
-	const p = { data, s, fs, fullName, avatar, logo, contact, social, cta, disclaimer, titleLine, companyLine };
+	const p = {
+		data,
+		s,
+		fs,
+		fullName,
+		avatar,
+		logo,
+		contact,
+		social,
+		cta,
+		disclaimer,
+		titleLine,
+		companyLine
+	};
 	const fontImport = buildFontImport(data);
 
 	switch (data.layout) {
-		case 2: return `${fontImport}${buildLayout2(p)}`;
-		case 3: return `${fontImport}${buildLayout3(p)}`;
-		case 4: return `${fontImport}${buildLayout4(p)}`;
-		case 5: return `${fontImport}${buildLayout5(p)}`;
-		case 6: return `${fontImport}${buildLayout6(p)}`;
-		default: return `${fontImport}${buildLayout1(p)}`;
+		case 2:
+			return `${fontImport}${buildLayout2(p)}`;
+		case 3:
+			return `${fontImport}${buildLayout3(p)}`;
+		case 4:
+			return `${fontImport}${buildLayout4(p)}`;
+		case 5:
+			return `${fontImport}${buildLayout5(p)}`;
+		case 6:
+			return `${fontImport}${buildLayout6(p)}`;
+		default:
+			return `${fontImport}${buildLayout1(p)}`;
 	}
 }
 
@@ -61,7 +82,13 @@ function buildFontImport(data: SignatureData): string {
 	return `<style>@import url('${href}');</style>`;
 }
 
-function buildAvatar(data: SignatureData, fullName: string, initials: string, s: StyleVars, size = 80): string {
+function buildAvatar(
+	data: SignatureData,
+	fullName: string,
+	initials: string,
+	s: StyleVars,
+	size = 80
+): string {
 	const borderStyle = s.avatarBorder !== 'none' ? `border:${s.avatarBorder};` : '';
 	if (data.avatarUrl) {
 		return `<img src="${data.avatarUrl}" alt="${fullName}" width="${size}" height="${size}" style="display:block;width:${size}px !important;height:${size}px !important;min-width:${size}px;min-height:${size}px;max-width:${size}px;max-height:${size}px;border-radius:9999px;object-fit:cover;object-position:center center;box-sizing:border-box;${borderStyle}" />`;
@@ -76,10 +103,16 @@ function buildLogo(data: SignatureData): string {
 
 function buildContact(data: SignatureData, s: StyleVars, fs: number): string {
 	const lines: string[] = [];
-	if (data.email) lines.push(`<a href="mailto:${data.email}" style="color:${s.linkColor};text-decoration:none;word-break:break-word;overflow-wrap:anywhere;">${data.email}</a>`);
+	if (data.email)
+		lines.push(
+			`<a href="mailto:${data.email}" style="color:${s.linkColor};text-decoration:none;word-break:break-word;overflow-wrap:anywhere;">${data.email}</a>`
+		);
 	const phones = [data.officePhone, data.mobilePhone].filter(Boolean).join(' &middot; ');
 	if (phones) lines.push(`<span>${phones}</span>`);
-	if (data.website) lines.push(`<a href="${data.website}" style="color:${s.linkColor};text-decoration:none;word-break:break-word;overflow-wrap:anywhere;">${data.website}</a>`);
+	if (data.website)
+		lines.push(
+			`<a href="${data.website}" style="color:${s.linkColor};text-decoration:none;word-break:break-word;overflow-wrap:anywhere;">${data.website}</a>`
+		);
 	return `<div style="font-size:${fs - 2}px;color:${s.mutedColor};">${lines.join('<br/>')}</div>`;
 }
 
@@ -115,7 +148,8 @@ function buildCta(data: SignatureData, s: StyleVars, fs: number): string {
 
 function buildDisclaimer(data: SignatureData, s: StyleVars, fs: number): string {
 	if (!data.disclaimer) return '';
-	return `<div style="margin-top:12px;border-top:1px solid ${s.borderColor};padding-top:8px;font-size:${fs - 3}px;color:${s.disclaimerColor};max-width:460px;">${data.disclaimer}</div>`;
+	const disclaimerText = data.disclaimer.replace(/\r?\n/g, '<br/>');
+	return `<div style="margin-top:12px;border-top:1px solid ${s.borderColor};padding-top:8px;font-size:${fs - 3}px;color:${s.disclaimerColor};max-width:460px;white-space:pre-line;overflow-wrap:anywhere;">${disclaimerText}</div>`;
 }
 
 function bottomRow(logo: string, social: string): string {
@@ -150,7 +184,9 @@ ${p.disclaimer ? `<tr><td colspan="2">${p.disclaimer}</td></tr>` : ''}
 }
 
 function buildLayout2(p: Parts): string {
-	const centeredAvatar = p.data.avatarUrl ? p.avatar.replace('display:block;', 'display:block;margin:0 auto;') : p.avatar;
+	const centeredAvatar = p.data.avatarUrl
+		? p.avatar.replace('display:block;', 'display:block;margin:0 auto;')
+		: p.avatar;
 	const inner = `
 <div style="text-align:center;">
 	<div style="margin-bottom:10px;">${centeredAvatar}</div>
@@ -158,7 +194,7 @@ function buildLayout2(p: Parts): string {
   <div style="font-size:${p.fs - 1}px;color:${p.s.titleColor};margin-top:2px;">${p.titleLine}</div>
   ${p.companyLine}
   <div style="margin-top:8px;">${p.contact}</div>
-  ${(p.logo || p.social) ? `<div style="margin-top:10px;">${p.logo} ${p.social}</div>` : ''}
+  ${p.logo || p.social ? `<div style="margin-top:10px;">${p.logo} ${p.social}</div>` : ''}
   ${p.cta}
   ${p.disclaimer}
 </div>`;
