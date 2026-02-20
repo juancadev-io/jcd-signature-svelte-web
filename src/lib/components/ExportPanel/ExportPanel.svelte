@@ -7,18 +7,21 @@
   - Load config from JSON file
 -->
 <script lang="ts">
-	import { signature, loadSignature, resetSignature, exportConfig } from '$lib/stores/signatureStore';
+	import {
+		signature,
+		loadSignature,
+		resetSignature,
+		exportConfig
+	} from '$lib/stores/signatureStore';
 	import type { SignatureData } from '$lib/types/signature';
 	import { generateHTML } from '$lib/utils/exportHTML';
 	import { exportAsPNG } from '$lib/utils/exportPNG';
 
-	// The preview DOM element passed from the parent
 	let { previewEl }: { previewEl: HTMLDivElement } = $props();
 
 	let copied = $state(false);
 	let exporting = $state(false);
 
-	// ── Copy HTML ──────────────────────────────────────────────────────
 	async function copyHTML() {
 		const html = generateHTML($signature);
 		if (window.ClipboardItem) {
@@ -34,16 +37,16 @@
 		setTimeout(() => (copied = false), 2500);
 	}
 
-	// ── Download PNG ───────────────────────────────────────────────────
 	async function downloadPNG() {
 		if (!previewEl) return;
 		exporting = true;
-		const name = `${$signature.firstName}-${$signature.lastName}`.replace(/\s+/g, '-').toLowerCase();
+		const name = `${$signature.firstName}-${$signature.lastName}`
+			.replace(/\s+/g, '-')
+			.toLowerCase();
 		await exportAsPNG(previewEl, `signature-${name}.png`);
 		exporting = false;
 	}
 
-	// ── Save config as JSON ────────────────────────────────────────────
 	function saveConfig() {
 		const json = exportConfig($signature);
 		const blob = new Blob([json], { type: 'application/json' });
@@ -55,7 +58,6 @@
 		URL.revokeObjectURL(url);
 	}
 
-	// ── Load config from JSON ──────────────────────────────────────────
 	function handleLoadConfig(e: Event) {
 		const input = e.target as HTMLInputElement;
 		const file = input.files?.[0];
@@ -68,55 +70,52 @@
 			} catch {
 				alert('Invalid config file.');
 			}
-			// Reset input so the same file can be reloaded
 			input.value = '';
 		};
 		reader.readAsText(file);
 	}
 </script>
 
-<div class="space-y-3">
-	<h2 class="text-xs font-semibold text-gray-400 uppercase tracking-widest px-1">Export</h2>
-
-	<!-- Copy HTML -->
-	<button
-		onclick={copyHTML}
-		class="w-full flex items-center justify-center gap-2 rounded-xl py-3 px-4 text-sm font-semibold transition-all
-		{copied ? 'bg-green-500 text-white' : 'bg-indigo-500 hover:bg-indigo-600 text-white'}"
-	>
-		{copied ? '✓ Copied to clipboard!' : '📋 Copy HTML for Gmail / Outlook'}
-	</button>
-
-	<!-- Download PNG -->
-	<button
-		onclick={downloadPNG}
-		disabled={exporting}
-		class="w-full flex items-center justify-center gap-2 rounded-xl py-3 px-4 text-sm font-semibold bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 transition-all disabled:opacity-50"
-	>
-		{exporting ? '⏳ Generating...' : '📱 Download PNG (mobile)'}
-	</button>
-
-	<div class="border-t border-gray-100 pt-3 space-y-2">
-		<h2 class="text-xs font-semibold text-gray-400 uppercase tracking-widest px-1">Config</h2>
-
-		<!-- Save JSON -->
+<div
+	class="lg:backdrop-blur-0 fixed right-4 bottom-4 left-4 z-20 rounded-2xl border border-gray-200 bg-white/95 p-2.5 shadow-lg backdrop-blur-sm lg:static lg:right-auto lg:bottom-auto lg:left-auto lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none"
+>
+	<div class="grid grid-cols-2 gap-2 lg:grid-cols-1 lg:gap-2.5">
 		<button
-			onclick={saveConfig}
-			class="w-full flex items-center justify-center gap-2 rounded-xl py-2.5 px-4 text-sm font-medium bg-white border border-gray-200 text-gray-600 hover:bg-gray-50 transition-all"
+			onclick={copyHTML}
+			class="flex items-center justify-center gap-1.5 rounded-lg px-2 py-2 text-xs font-semibold transition-all {copied
+				? 'bg-green-500 text-white'
+				: 'bg-indigo-500 text-white hover:bg-indigo-600'}"
 		>
-			💾 Save config (.json)
+			{copied ? '✓ Copied' : '📋 Copy HTML'}
 		</button>
 
-		<!-- Load JSON -->
-		<label class="w-full flex items-center justify-center gap-2 rounded-xl py-2.5 px-4 text-sm font-medium bg-white border border-gray-200 text-gray-600 hover:bg-gray-50 transition-all cursor-pointer">
-			📂 Load config (.json)
+		<button
+			onclick={downloadPNG}
+			disabled={exporting}
+			class="flex items-center justify-center gap-1.5 rounded-lg border border-gray-200 bg-white px-2 py-2 text-xs font-semibold text-gray-700 transition-all hover:bg-gray-50 disabled:opacity-50"
+		>
+			{exporting ? '⏳ PNG...' : '📱 PNG'}
+		</button>
+
+		<button
+			onclick={saveConfig}
+			class="flex items-center justify-center gap-1.5 rounded-lg border border-gray-200 bg-white px-2 py-2 text-xs font-medium text-gray-600 transition-all hover:bg-gray-50"
+		>
+			💾 Save
+		</button>
+
+		<label
+			class="flex cursor-pointer items-center justify-center gap-1.5 rounded-lg border border-gray-200 bg-white px-2 py-2 text-xs font-medium text-gray-600 transition-all hover:bg-gray-50"
+		>
+			📂 Load
 			<input type="file" accept=".json" onchange={handleLoadConfig} class="sr-only" />
 		</label>
+	</div>
 
-		<!-- Reset -->
+	<div class="mt-2 hidden lg:block">
 		<button
 			onclick={resetSignature}
-			class="w-full flex items-center justify-center gap-2 rounded-xl py-2.5 px-4 text-sm font-medium text-red-400 hover:bg-red-50 border border-transparent hover:border-red-100 transition-all"
+			class="w-full rounded-lg px-2 py-2 text-xs font-medium text-red-500 transition-all hover:bg-red-50"
 		>
 			↺ Reset to defaults
 		</button>
